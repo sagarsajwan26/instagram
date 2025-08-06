@@ -17,6 +17,8 @@ const generateAccessToken = async (id) => {
 
 
 export const userSignup = asyncHandler(async (req, res) => {
+  console.log(req.body);
+  
   const { username, email, password, bio } = req.body;
 
   if (!username.trim() || !email.trim() || !password.trim())
@@ -76,6 +78,8 @@ export const verifyEmail = asyncHandler(async (req, res) => {
 });
 
 export const userLogin = asyncHandler(async (req, res) => {
+    console.log(req.body);
+
   const { email, password } = req.body;
   if (!email || !password)
     return res.status(400).json({ message: "fields are required" });
