@@ -1,0 +1,125 @@
+import React, { useState } from 'react'
+import { Link, useLocation } from 'react-router'
+
+const MenuSidebar = () => {
+  const [showSetting, setShowSetting] = useState(false)
+  const navlinks = [
+    {
+      name: 'Home',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m-4 0h12" />
+        </svg>
+      ),
+      to: '/',
+    },
+    {
+      name: 'Search',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      ),
+      to: '/search',
+    },
+    {
+      name: 'Chats',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h14M3 6h18M3 14h10M21 21v-2a4 4 0 00-3-3.87" />
+        </svg>
+      ),
+      to: '/chats',
+    },
+    {
+      name: 'Notifications',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+        </svg>
+      ),
+      to: '/notification',
+    },
+    {
+      name: 'Upload Reel',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+        </svg>
+      ),
+      to: '/upload',
+    },
+    {
+      name: 'Profile',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 20v-2c0-2.21 3.58-4 8-4s8 1.79 8 4v2" />
+        </svg>
+      ),
+      to: '/profile',
+    },
+  ]
+  const location = useLocation()
+
+  return (
+    <div className="bg-base-200 min-h-screen p-4 w-20 md:w-60 flex flex-col text-white relative">
+     <div className="mb-6 flex justify-center md:justify-start">
+
+  <img src="/InstaLogo.png" alt="Logo" className="block md:hidden h-10 w-auto" />
+
+
+  <img src="/logo.png" alt="Logo" className="hidden md:block h-10 w-auto" />
+</div>
+
+
+      <nav className="flex flex-col space-y-4">
+        {navlinks.map((item, idx) => (
+          <Link
+            key={idx}
+            to={item.to}
+            className={`flex items-center px-3 py-2 rounded-md transition-colors cursor-pointer
+              ${location.pathname === item.to ? 'bg-primary text-white font-bold' : 'hover:bg-primary'}
+            `}
+          >
+            {item.icon}
+            <span className="hidden md:inline ml-3 font-semibold">{item.name}</span>
+          </Link>
+        ))}
+      </nav>
+
+      <div className="mt-auto pt-4 border-t border-gray-300 relative">
+      
+        {showSetting && (
+          <div className="absolute bottom-12 left-0 bg-base-300 p-4 rounded-md shadow-lg w-full md:w-56 flex flex-col space-y-3 z-10">
+         <button onClick={()=>{setShowSetting(!showSetting)}}>
+              <Link  to="/setting" className="flex items-center gap-2 px-2 py-1 rounded hover:bg-primary cursor-pointer">
+              ⚙️ <span className="font-semibold text-white">Setting</span>
+            </Link>
+          </button>
+           <button onClick={()=>{setShowSetting(!showSetting)}}>
+             <Link  to='/saved' className="flex items-center gap-2 px-2 py-1 rounded hover:bg-primary cursor-pointer w-full text-left">
+              📑 <span className="font-semibold text-white">Saved</span>
+            </Link>
+           </button>
+            <button className="flex items-center gap-2 px-2 py-1 rounded hover:bg-primary cursor-pointer w-full text-left">
+              🚪 <span className="font-semibold text-white">Logout</span>
+            </button>
+          </div>
+        )}
+
+        <button
+          onClick={() => setShowSetting(!showSetting)}
+          className="flex items-center hover:bg-primary px-3 py-2 rounded-md transition-colors w-full"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <span className="hidden md:inline ml-3 font-semibold">More</span>
+        </button>
+      </div>
+    </div>
+  )
+}
+
+export default MenuSidebar
