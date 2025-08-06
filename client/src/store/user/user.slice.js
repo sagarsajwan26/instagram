@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { loginThunk, signupThunk } from "./user.thunk"
+import {  loginThunk, signupThunk } from "./user.thunk"
 
 const initialState={
     isAuthenticated:false,
@@ -36,6 +36,7 @@ builder.addCase(signupThunk.fulfilled,(state,action)=>{
 builder.addCase(signupThunk.rejected,(state,action)=>{
 
 })
+
 
 
 

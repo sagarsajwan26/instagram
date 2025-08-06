@@ -40,19 +40,20 @@ try {
 }
 })
 
-export const getUserProfile= createAsyncThunk("/user/getProfile",async(_,{rejectWithValue})=>{
-const token =localStorage.getItem('accessToken') 
-    try {
-        const res= await axiosInstance.get('/users/getProfile',{
-           headers:{
-            'Authorization':`Bearer ${token}`
-           }
-        })
-        console.log(res);
+// export const getUserProfile= createAsyncThunk("/user/getProfile",async(_,{rejectWithValue})=>{
+// const token =localStorage.getItem('accessToken') 
+//     try {
+//         const res= await axiosInstance.get('/users/getProfile',{
+//            headers:{
+//             'Authorization':`Bearer ${token}`
+//            }
+//         })
+//         console.log(res);
+//         return res.data
         
         
-    } catch (error) {
-        console.log(error);
+//     } catch (error) {
+//         console.log(error);
         
-    }
-})
+//     }
+// })

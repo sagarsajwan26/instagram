@@ -5,10 +5,10 @@ import { asyncHandler } from "../utils/AsyncHandler.js";
 import { uploadToCloudinary } from "../utils/Cloudinary.js";
 
 export const addPost = asyncHandler(async (req, res) => {
-  const {  caption } = req.body;
+  const { caption } = req.body;
   const posts = req.files;
 
-  if ( !caption?.trim())
+  if (!caption?.trim())
     return res.status(400).json({ message: "Fields cannot be empty" });
   if (!posts || posts.length <= 0)
     return res.status(400).json({ message: "Posts cannot be empty" });
@@ -23,7 +23,6 @@ export const addPost = asyncHandler(async (req, res) => {
   }));
 
   const newPost = await Post.create({
-   
     caption,
     media,
     userId: req.user.id,
