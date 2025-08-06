@@ -1,22 +1,25 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { use, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router'
+import { getUserProfile } from '../../store/user/user.thunk'
 
 const Profile = () => {
+ const dispatch= useDispatch()
+  useEffect(()=>{
+    dispatch(getUserProfile())
+    
+  })
   const { userData } = useSelector(state => state.user)
-  // Example fallback values if userData is missing
   const name = userData?.username || "SagarSajwan"
   const bio = userData?.bio || "Mastering the art of 3D modeling❤️\nfrom concept to render."
   const avatar = userData?.avatarUrl || "https://imgs.search.brave.com/V0e-l8IvvALnL7MXu6eEC3DJuV1qMmrOR-U37V9FtFM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZs/YXRpY29uLmNvbS8x/MjgvODQ3Lzg0Nzk2/OS5wbmc"
   const postCount = userData?.posts?.length || 1
   const followers = userData?.followers?.length || 1
   const following = userData?.following?.length || 1
-  // Example gallery; use userData.images[] in real app
   const gallery = userData?.gallery || Array(8).fill("https://imgs.search.brave.com/K-3FwjZuS31UnN_6qT_DBIJmt6KwX2n9db7jMSPFMLg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS12ZWN0b3Iv/bmF0dXJlLWxhbmRp/bmctcGFnZV8yMy0y/MTQ4MTY3MTg1Lmpw/Zz9zZW10PWFpc19o/eWJyaWQ")
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-blue-200 py-8 flex flex-col items-center">
-      {/* Profile info card */}
       <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl mb-8 p-6 flex flex-col md:flex-row items-center md:items-start gap-8">
         <img
           src={avatar}

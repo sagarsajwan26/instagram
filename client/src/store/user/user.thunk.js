@@ -40,3 +40,19 @@ try {
 }
 })
 
+export const getUserProfile= createAsyncThunk("/user/getProfile",async(_,{rejectWithValue})=>{
+const token =localStorage.getItem('accessToken') 
+    try {
+        const res= await axiosInstance.get('/users/getProfile',{
+           headers:{
+            'Authorization':`Bearer ${token}`
+           }
+        })
+        console.log(res);
+        
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+})

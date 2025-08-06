@@ -167,3 +167,9 @@ export const followUnfollowUser = asyncHandler(async (req, res) => {
 
   return res.status(200).json(new ApiResponse(200, ifFollowing ? "unfollowed" : "following"));
 });
+
+export const getUserProfile= asyncHandler(async(req,res)=>{
+  const user= await User.findOne({_id:req.user.id})
+  if(!user) return res.status(404).json({message:"user not found"})
+    return res.status(200).json(new ApiResponse(200,"user found",user))
+})
