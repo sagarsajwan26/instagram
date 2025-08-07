@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Link, useLocation } from 'react-router'
+import { Link, useLocation } from 'react-router' 
 
 const MenuSidebar = () => {
   const [showSetting, setShowSetting] = useState(false)
+
   const navlinks = [
     {
       name: 'Home',
@@ -60,27 +61,25 @@ const MenuSidebar = () => {
       to: '/profile',
     },
   ]
+
   const location = useLocation()
 
   return (
-    <div className="bg-base-200 min-h-screen p-4 w-20 md:w-60 flex flex-col text-white relative">
-     <div className="mb-6 flex justify-center md:justify-start">
+    <div className="bg-base-200 text-white min-h-screen w-20 md:w-60 flex flex-col p-4 flex-shrink-0 relative overflow-y-auto">
+      <div className="mb-6 flex justify-center md:justify-start">
+        <img src="/InstaLogo.png" alt="Logo" className="block md:hidden h-10 w-auto" />
+        <img src="/logo.png" alt="Logo" className="hidden md:block h-10 w-auto" />
+      </div>
 
-  <img src="/InstaLogo.png" alt="Logo" className="block md:hidden h-10 w-auto" />
-
-
-  <img src="/logo.png" alt="Logo" className="hidden md:block h-10 w-auto" />
-</div>
-
-
-      <nav className="flex flex-col space-y-4">
+      <nav className="flex flex-col space-y-3">
         {navlinks.map((item, idx) => (
           <Link
             key={idx}
             to={item.to}
-            className={`flex items-center px-3 py-2 rounded-md transition-colors cursor-pointer
-              ${location.pathname === item.to ? 'bg-primary text-white font-bold' : 'hover:bg-primary'}
+            className={`flex items-center px-3 py-2 rounded-md transition-colors cursor-pointer 
+              ${location.pathname === item.to ? 'bg-primary text-white font-semibold' : 'hover:bg-primary hover:text-white'}
             `}
+            aria-current={location.pathname === item.to ? 'page' : undefined}
           >
             {item.icon}
             <span className="hidden md:inline ml-3 font-semibold">{item.name}</span>
@@ -88,28 +87,32 @@ const MenuSidebar = () => {
         ))}
       </nav>
 
-      <div className="mt-auto pt-4 border-t border-gray-300 relative">
-      
+      <div className="mt-auto pt-4 border-t border-gray-400 relative">
         {showSetting && (
-          <div className="absolute bottom-12 left-0 bg-base-300 p-4 rounded-md shadow-lg w-full md:w-56 flex flex-col space-y-3 z-10">
-         <button onClick={()=>{setShowSetting(!showSetting)}}>
-              <Link  to="/setting" className="flex items-center gap-2 px-2 py-1 rounded hover:bg-primary cursor-pointer">
+          <div className="absolute bottom-12 left-0 bg-zinc-800 p-4 rounded-md shadow-lg w-full md:w-56 flex flex-col space-y-3 z-20">
+            <Link
+              to="/setting"
+              onClick={() => setShowSetting(false)}
+              className="flex items-center gap-2 px-2 py-1 rounded hover:bg-primary cursor-pointer"
+            >
               ⚙️ <span className="font-semibold text-white">Setting</span>
             </Link>
-          </button>
-           <button onClick={()=>{setShowSetting(!showSetting)}}>
-             <Link  to='/saved' className="flex items-center gap-2 px-2 py-1 rounded hover:bg-primary cursor-pointer w-full text-left">
+            <Link
+              to="/saved"
+              onClick={() => setShowSetting(false)}
+              className="flex items-center gap-2 px-2 py-1 rounded hover:bg-primary cursor-pointer w-full text-left"
+            >
               📑 <span className="font-semibold text-white">Saved</span>
             </Link>
-           </button>
-            <button className="flex items-center gap-2 px-2 py-1 rounded hover:bg-primary cursor-pointer w-full text-left">
-              🚪 <span className="font-semibold text-white">Logout</span>
+            <button className="flex items-center gap-2 px-2 py-1 rounded hover:bg-primary cursor-pointer w-full text-left text-white">
+              🚪 <span className="font-semibold">Logout</span>
             </button>
           </div>
         )}
 
         <button
           onClick={() => setShowSetting(!showSetting)}
+          aria-label="Toggle settings menu"
           className="flex items-center hover:bg-primary px-3 py-2 rounded-md transition-colors w-full"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white">

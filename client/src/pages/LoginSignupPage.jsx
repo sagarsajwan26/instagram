@@ -12,7 +12,7 @@ function LoginSignupPage() {
   const navigate= useNavigate()
   const [signupState, setSignupState] = useState(false)
  const [loginForm, setLoginForm] = useState({
-      email:'',
+      email:'macep70765@nicext.com',
       password:'',
       username:''
     })
@@ -99,11 +99,11 @@ function LoginSignupPage() {
           )}
           <input 
           id='email'
-          onChange={(e)=>onValueChange(e)}
+          // onChange={(e)=>onValueChange(e)}
             type="email"
             placeholder="Email"
             className="input input-bordered w-full"
-            required
+            // required
           />
           <input 
           id='password'

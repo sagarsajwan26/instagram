@@ -37,3 +37,18 @@ export const getUserPosts= createAsyncThunk('/user/getUserPosts',async()=>{
     
   }
 })
+
+export const getAllPosts= createAsyncThunk('/user/getAllPosts',async()=>{
+  const token = localStorage.getItem('accessToken')
+  try {
+    const res= await axiosInstance.get('/post/getAllPosts',{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    })
+    return res.data
+  } catch (error) {
+    console.log(error);
+
+  }
+})

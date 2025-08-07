@@ -167,7 +167,16 @@ export const followUnfollowUser = asyncHandler(async (req, res) => {
 
   return res.status(200).json(new ApiResponse(200, ifFollowing ? "unfollowed" : "following"));
 });
+export const getSearchUser= asyncHandler(async(req,res)=>{
+  const {username}= req.query
+  const limit= 10 
+  const skip=0 
+  if(!username) return res.status(400).json({message:"username is required"})
+  const user= await User.find({username:{$regex:username, $options:'i'}}).limit(limit).skip(skip)
+  if(!user) return res.status(404).json({message:"user not found"})
+  return res.status(200).json(new ApiResponse(200, "user found", user))
 
+})
 // export const getUserProfile= asyncHandler(async(req,res)=>{
 //   const user= await User.findOne({_id:req.user.id})
 //   if(!user) return res.status(404).json({message:"user not found"})
