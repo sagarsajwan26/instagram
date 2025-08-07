@@ -14,5 +14,9 @@ const fileFilter = (req, file, cb) => {
     cb(new Error('Only image and video files are allowed!'), false)
   }
 }
+const limits ={
+  fileSize: 1024 * 1024 * 20
 
-export const upload = multer({ storage, fileFilter }) 
+}
+
+export const upload = multer({ storage, fileFilter, limits }) 
