@@ -1,5 +1,5 @@
 import Router from 'express'
-import { followUnfollowUser, getUserProfile, logout, updateProfilePic, updateUser, userLogin, userSignup, verifyEmail } from '../controllers/user.controller.js'
+import { followUnfollowUser,  logout, updateProfilePic, updateUser, userLogin, userSignup, verifyEmail } from '../controllers/user.controller.js'
 import { userAuth } from '../middleware/authMiddleware.js'
 import { upload } from '../middleware/multer.middleware.js'
 
